@@ -1,10 +1,24 @@
 .container{
+    margin: 0;
     display: flex;
     flex-direction: column;
     width: 1000px;
     text-align: center;
     color: black;
     margin-top: 0;
+    font-size: 20px;
     padding: 190px;
+  }
+
+
+  .container input{
+    width: 100%; /* Full width */
+    padding: 12px 20px; /* Padding inside the input */
+    margin: 8px 0; /* Margin around the input */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    border: 2px solid #ccc; /* Border style */
+    border-radius: 4px; /* Rounded corners */
+
+
   }
   
