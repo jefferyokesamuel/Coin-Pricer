@@ -2,16 +2,16 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Header from './components/Header'
+import Body from './components/body/Body'
 
 function App() {
   
 
   return (
     <>
-      <div>
-        <h2>Welcome to Coin Pricer</h2>
-        <p></p>
-      </div>
+      <Header />
+      <Body />
     </>
   )
 }
