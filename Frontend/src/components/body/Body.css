@@ -1,7 +1,8 @@
 .container{
-    margin: 0;
     display: flex;
+    justify-content: center;
     flex-direction: column;
+    border: 2px solid #ccc;
     width: 1000px;
     text-align: center;
     color: black;
@@ -12,13 +13,21 @@
 
 
   .container input{
-    width: 100%; /* Full width */
-    padding: 12px 20px; /* Padding inside the input */
-    margin: 8px 0; /* Margin around the input */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    border: 2px solid #ccc; /* Border style */
-    border-radius: 4px; /* Rounded corners */
-
-
+    width: 100%; 
+    padding: 12px 20px; 
+    margin: 8px 0; 
+    box-sizing: border-box; 
+    border: 2px solid #ccc;
+    border-radius: 4px; 
   }
   
+ button{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+button:hover {
+    border-color: #fff; 
+}
