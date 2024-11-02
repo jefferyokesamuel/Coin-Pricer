@@ -3,9 +3,11 @@ package main
 import(
 	"fmt"
 	"net/http"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"log"
 	"io"
+	"time"
 
 )
 
@@ -89,6 +91,19 @@ func tokensList(c *gin.Context){
 
 func main() {
 	router := gin.Default()
+
+	  // Configure CORS middleware
+	  config := cors.Config{
+        AllowOrigins:     []string{"http://localhost:5173"}, 
+        AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+        ExposeHeaders:    []string{"Content-Length"},
+        AllowCredentials: true,
+        MaxAge: 12 * time.Hour,
+    }
+
+    // Apply the CORS middleware
+    router.Use(cors.New(config))
 	router.GET("/supportedList", tokensList)
 	router.GET("/tokenprice", getPrice)
 	router.Run("localhost:8080")
