@@ -83,6 +83,13 @@ const Body = () => {
         <div>
           <h3>Price Data</h3>
           <pre>{JSON.stringify(price, null, 2)}</pre>
+
+          {price.map(token => (
+            <div key={token.id}>
+                <p>{token.symbol}</p>
+                <p>{token.name}</p>
+            </div>
+          ))}
         </div>
       )}
     </div>
