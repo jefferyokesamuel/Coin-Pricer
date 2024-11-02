@@ -5,17 +5,17 @@ import axios from 'axios';
 const Body = () => {
   const [token, setToken] = useState('');
   const [amount, setAmount] = useState(0);
-  const [priceData, setPriceData] = useState([]); // Renamed for clarity
+  const [priceData, setPriceData] = useState([]); 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Function to fetch token value
+
   const getTokenValue = async (token, amount) => {
     setLoading(true);
     setError(null); 
 
     try {
-      // Axios GET request to your backend API
+      
       const response = await axios.get('http://localhost:8080/tokenprice', {
         params: {
           id: token,
@@ -24,7 +24,7 @@ const Body = () => {
       });
 
       console.log(response.data);
-      setPriceData(response.data.data || []); // Assuming response.data.data is an array
+      setPriceData(response.data.data || []); 
     } catch (err) {
       console.error(err);
       setError('Failed to fetch price data.');
@@ -33,7 +33,7 @@ const Body = () => {
     }
   };
 
-  // Handle form submission
+  
   const handleSubmit = (e) => {
     e.preventDefault(); 
 
@@ -53,7 +53,7 @@ const Body = () => {
         Coin Pricer makes it easy to search and track real-time prices for thousands of crypto tokens. 💰🪙
       </p>
 
-      {/* Form for token and amount */}
+      
       <form onSubmit={handleSubmit}>
         <input
           placeholder='Crypto Token'
@@ -70,13 +70,13 @@ const Body = () => {
         <button type='submit'>Submit</button>
       </form>
 
-      {/* Loading state */}
+   
       {loading && <p>Loading...</p>}
 
-      {/* Error message */}
+     
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      {/* Display fetched price */}
+    
       {priceData.length > 0 && (
         <div>
           <h3>Price Data</h3>
