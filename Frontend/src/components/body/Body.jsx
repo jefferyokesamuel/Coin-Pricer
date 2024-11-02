@@ -3,20 +3,19 @@ import './Body.css';
 import axios from 'axios';
 
 const Body = () => {
-
   const [token, setToken] = useState('');
   const [amount, setAmount] = useState(0);
-  const [price, setPrice] = useState(null);
+  const [priceData, setPriceData] = useState([]); // Renamed for clarity
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-
+  // Function to fetch token value
   const getTokenValue = async (token, amount) => {
     setLoading(true);
     setError(null); 
 
     try {
-   
+      // Axios GET request to your backend API
       const response = await axios.get('http://localhost:8080/tokenprice', {
         params: {
           id: token,
@@ -24,9 +23,8 @@ const Body = () => {
         },
       });
 
-     
-      console.log(response)
-      setPrice(response.data);
+      console.log(response.data);
+      setPriceData(response.data.data || []); // Assuming response.data.data is an array
     } catch (err) {
       console.error(err);
       setError('Failed to fetch price data.');
@@ -35,7 +33,7 @@ const Body = () => {
     }
   };
 
-
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault(); 
 
@@ -67,7 +65,7 @@ const Body = () => {
           placeholder='Amount'
           type='number'
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => setAmount(parseFloat(e.target.value))} // Ensure amount is a number
         />
         <button type='submit'>Submit</button>
       </form>
@@ -79,17 +77,19 @@ const Body = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       {/* Display fetched price */}
-      {price && (
+      {priceData.length > 0 && (
         <div>
           <h3>Price Data</h3>
-          <pre>{JSON.stringify(price, null, 2)}</pre>
-
-          {price.map(token => (
-            <div key={token.id}>
-                <p>{token.symbol}</p>
-                <p>{token.name}</p>
-            </div>
-          ))}
+          <ul>
+            {priceData.map((token) => (
+              <li key={token.id}>
+                <h4>{token.name} ({token.symbol})</h4>
+                <p>Amount: {token.amount}</p>
+                <p>Price (USD): ${token.quote.USD.price.toFixed(6)}</p>
+                <p>Last Updated: {new Date(token.last_updated).toLocaleString()}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
